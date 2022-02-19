@@ -28,52 +28,32 @@ class BaseScreen extends StatelessWidget {
     return TabBarView(children: views);
   }
 
-  MaterialApp _buildBaseView() {
-    return MaterialApp(
-      home: DefaultTabController(
-          length: views.length,
-          child: Scaffold(
+  DefaultTabController _buildBaseView1() {
+    return DefaultTabController(
+        length: views.length,
+        child: Scaffold(
             appBar: AppBar(
-              bottom: TabBar(
-                tabs: viewIcons,
-              ),
               title: const Text('Tabs Demo'),
             ),
-            body: TabBarView(
-              children: views,
-            ),
-          )),
-    );
-  }
-
-  MaterialApp _buildBaseView1() {
-    return MaterialApp(
-      home: DefaultTabController(
-          length: views.length,
-          child: Scaffold(
-              appBar: AppBar(
-                title: const Text('Tabs Demo'),
-              ),
-              body: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 8,
-                    child: _buildTabBarView(),
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 8,
+                  child: _buildTabBarView(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    child: _buildTabBar(),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                      width: 1,
+                      color: Colors.orange,
+                    )),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: _buildTabBar(),
-                      decoration: const BoxDecoration(),
-                    ),
-                  ),
-                ],
-              )
-              // TabBarView(
-              //         children: views,
-              //       ),
-              )),
-    );
+                ),
+              ],
+            )));
   }
 
   @override

@@ -14,14 +14,28 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.red,
-          border: Border.all(color: Colors.indigo, width: 0.5)),
       child: Column(
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: boxWidget(),
+            child: Row(children: <Widget>[
+              Expanded(
+                  flex: 8,
+                  child: TextField(
+                      decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Hint',
+                  ))),
+              Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Search"),
+                    ),
+                  )),
+            ]),
           ),
           Expanded(
             flex: 8,
