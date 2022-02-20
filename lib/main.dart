@@ -16,11 +16,11 @@ void main() => runApp(MaterialApp(
 //       theme: ThemeData(
 //         primarySwatch: Colors.green,
 //       ),
-//       home: const BaseScreen(),
-//       // ChangeNotifierProvider<Counter>(
-//       //   create: (_) => Counter(),
-//       //   child: const Example(),
-//       // ),
+//       // home: const BaseScreen(),
+//       home : ChangeNotifierProvider<Counter>(
+//         create: (_) => Counter(),
+//         child: const Example(),
+//       ),
 //     );
 //   }
 // }

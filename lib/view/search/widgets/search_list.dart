@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
 
 class SearchList extends StatefulWidget {
   const SearchList({Key? key}) : super(key: key);
@@ -27,10 +28,9 @@ class _SearchListState extends State<SearchList> {
   Widget _buildSuggestions() {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
+      itemCount: strs.length,
       itemBuilder: (context, i) {
-        if (i == (strs.length) - 1) {
-          return const Divider();
-        }
+        log("data2 :: $i");
         return _buildRow(strs[i]);
       },
     );

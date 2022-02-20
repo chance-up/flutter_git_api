@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/search_input.dart';
 import 'widgets/search_list.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
