@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'widgets/search_input.dart';
+import 'widgets/search_list.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -13,36 +15,17 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Row(children: <Widget>[
-              Expanded(
-                  flex: 8,
-                  child: TextField(
-                      decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Hint',
-                  ))),
-              Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Search"),
-                    ),
-                  )),
-            ]),
-          ),
-          Expanded(
-            flex: 8,
-            child: boxWidget(),
-          ),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        const Expanded(
+          flex: 1,
+          child: SearchingWidget(),
+        ),
+        Expanded(
+          flex: 8,
+          child: SearchList(),
+        ),
+      ],
     );
   }
 }
