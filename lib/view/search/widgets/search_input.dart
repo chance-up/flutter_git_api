@@ -9,21 +9,22 @@ class SearchingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late SearchViewModel viewModel = Provider.of<SearchViewModel>(context);
+    late SearchViewModel viewModel = Provider.of<SearchViewModel>(context, listen: false);
 
     final myController = TextEditingController();
 
     void printMSG() {
-      log("kkkk :: ${viewModel.searchText}");
+      // viewModel.searchText = myController.text;
+      // viewModel.update();
+      // var stream = Stream.periodic(Duration(seconds: 1), (x) => x).take(10); // 1. 스트림 만들기 - 1초마다 데이터를 1개씩 만듬, 10개 까지만.
+      // stream.listen(print); // 2. 이벤트 처리
       viewModel.searchText = myController.text;
-      log("kkkk :: ${viewModel.searchText}");
-      viewModel.update();
       viewModel.searchUsers();
     }
 
     return Row(children: <Widget>[
       Expanded(
-        flex: 8,
+        flex: 7,
         child: TextField(
             controller: myController,
             decoration: InputDecoration(
@@ -33,7 +34,7 @@ class SearchingWidget extends StatelessWidget {
             )),
       ),
       Expanded(
-          flex: 1,
+          flex: 3,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(

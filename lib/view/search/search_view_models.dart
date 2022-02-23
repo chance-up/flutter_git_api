@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:search_git_users/model/database.dart';
 import 'package:search_git_users/model/git_user.dart';
 import 'package:search_git_users/model/git_user_api_repository.dart';
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:convert';
 
 class SearchViewModel extends ChangeNotifier {
@@ -11,8 +12,21 @@ class SearchViewModel extends ChangeNotifier {
   List<GitUser> get gitUsers => _gitUsers;
   String searchText = "";
 
+  List<GitUser> _gitUsersLiked = List.empty();
+  List<GitUser> get gitUsersLiked => _gitUsersLiked;
+
+  var database;
+
+  SearchViewModel() {
+    //addUserToDb();
+  }
+
   void update() {
     notifyListeners();
+  }
+
+  void test() {
+    update();
   }
 
   void searchUsers() async {
@@ -22,6 +36,16 @@ class SearchViewModel extends ChangeNotifier {
     _gitUsers = List.empty();
     _gitUsers = gitUserList;
     update();
+  }
+
+  void addUserToDb() async {
+    database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+    final personDao = database.personDao;
+    // final person = Person(1, 'Frank');
+
+    //await personDao.insertPerson(person);
+    // final result = await personDao.findPersonById(1);
+    dev.log("result");
   }
 
   void tempFunc() async {

@@ -3,11 +3,7 @@ import 'package:search_git_users/view/search/search_screen.dart';
 import 'package:search_git_users/view/storage/storage_screen.dart';
 import 'package:search_git_users/view/temp/temp_screen.dart';
 
-List<Widget> views = [
-  const SearchScreen(),
-  const StoragerScreen(),
-  const TempScreen()
-];
+List<Widget> views = [const SearchScreen(), const StoragerScreen(), const TempScreen()];
 
 List<Widget> viewIcons = [
   const Tab(icon: Icon(Icons.search, color: Colors.black)),
@@ -33,7 +29,7 @@ class BaseScreen extends StatelessWidget {
         length: views.length,
         child: Scaffold(
             appBar: AppBar(
-              title: const Text('Tabs Demo'),
+              title: const Text('Search Github User'),
             ),
             body: Column(
               children: <Widget>[

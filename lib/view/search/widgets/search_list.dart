@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_git_users/model/git_user.dart';
-import 'dart:developer';
-
 import 'package:search_git_users/view/search/search_view_models.dart';
+import 'package:tuple/tuple.dart';
 
 class SearchList extends StatefulWidget {
   const SearchList({Key? key}) : super(key: key);
@@ -13,8 +14,7 @@ class SearchList extends StatefulWidget {
 }
 
 class _SearchListState extends State<SearchList> {
-  late SearchViewModel viewModel = Provider.of<SearchViewModel>(context);
-
+  late SearchViewModel viewModel = Provider.of<SearchViewModel>(context, listen: false);
   final _bigFont = const TextStyle(fontSize: 20);
   final _smallFont = const TextStyle(fontSize: 12);
 
@@ -48,32 +48,50 @@ class _SearchListState extends State<SearchList> {
               )),
         ],
       ),
-      trailing: const Icon(
-        Icons.favorite,
+      trailing: Icon(
+        gitUser.isLike ? Icons.favorite : Icons.favorite_border,
         color: Colors.red,
         semanticLabel: 'Save',
       ),
       onTap: () {
-        setState(() {});
+        setState(() {
+          viewModel.addUserToDb();
+          //gitUsersLiked
+        });
       },
     );
   }
 
-  Widget _buildSuggestions() {
-    final items = viewModel.gitUsers;
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: items.length,
-      itemBuilder: (context, i) {
-        return _buildRow(items[i]);
-      },
+  Widget _buildSuggestions(BuildContext context) {
+    return Selector<SearchViewModel, List<GitUser>>(
+      selector: (buildContext, model) => (model.gitUsers),
+      builder: (context, items, child) => ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: items.length,
+        itemBuilder: (context, i) {
+          return _buildRow(items[i]);
+        },
+      ),
     );
   }
+  // // Tuple을 사용해서 viewModel의 2개이상의 변수들을 감지할 때..
+  // Widget _buildSuggestions(BuildContext context) {
+  //   return Selector<SearchViewModel, Tuple2<List<GitUser>, List<GitUser>>>(
+  //     selector: (buildContext, model) => Tuple2(model.gitUsers, model.gitUsersLiked),
+  //     builder: (context, items, child) => ListView.builder(
+  //       padding: const EdgeInsets.all(16),
+  //       itemCount: items.item1.length,
+  //       itemBuilder: (context, i) {
+  //         return _buildRow(items.item1[i]);
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildSuggestions(),
+      body: _buildSuggestions(context),
     );
   }
 }
