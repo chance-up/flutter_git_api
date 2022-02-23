@@ -10,6 +10,10 @@ https://docs.flutter.dev/get-started/install
 
 # Flutter 기본 정보
 
+## Study 내용 정리
+https://velog.io/@ccs6473/Flutter
+
+
 ## Dependency 추가
 > pubspec.yaml 파일에 
 > 
